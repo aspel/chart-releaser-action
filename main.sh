@@ -24,7 +24,7 @@ main() {
     owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
     repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
 
-    args=(--owner "$owner" --repo "$repo")
+    args=(--owner "$owner")
     args+=(--charts-dir "${INPUT_CHARTS_DIR?Input 'charts_dir' is required}")
 
     if [[ -n "${INPUT_VERSION:-}" ]]; then
