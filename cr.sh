@@ -228,12 +228,14 @@ update_index() {
     set -x
 
     cr index -o "$owner" -r "$repo" -c "$charts_repo_url"
-
+    
+    git clone https://x-access-token:$CR_TOKEN@github.com/$owner/$repo chart_repo
+    pushd "chart_repo" > /dev/null
     gh_pages_worktree=$(mktemp -d)
 
     git worktree add "$gh_pages_worktree" gh-pages
 
-    cp --force .cr-index/index.yaml "$gh_pages_worktree/index.yaml"
+    cp --force ../.cr-index/index.yaml "$gh_pages_worktree/index.yaml"
 
     pushd "$gh_pages_worktree" > /dev/null
 
